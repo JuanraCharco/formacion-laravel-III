@@ -53,6 +53,6 @@ dr npm run dev
 ````
 
 ### Credenciales de acceso
-email: admin@tidop.es
+email: ````admin@tidop.es````
 
-password: admin@tidop.es
+password: ````admin@tidop.es````
