@@ -317,6 +317,11 @@ return [
             'icon' => 'fas fa-fw fa-circle',
         ],
         [
+            'text'        => 'Viewer',
+            'url'         => '/viewer',
+            'icon'        => 'fas fa-fw fa-map',
+        ],
+        [
             'text'        => 'File manager',
             'url'         => 'fileManager',
             'icon'        => 'fas fa-fw fa-folder-open',
