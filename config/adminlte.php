@@ -317,6 +317,12 @@ return [
             'icon' => 'fas fa-fw fa-circle',
         ],
         [
+            'text'        => 'File manager',
+            'url'         => 'fileManager',
+            'icon'        => 'fas fa-fw fa-folder-open',
+            'can'         => 'File manager',
+        ],
+        [
             'text'        => 'User management',
             'icon'        => 'fas fa-fw fa-users',
             'submenu' => [

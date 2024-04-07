@@ -56,6 +56,16 @@ return [
             'throw' => false,
         ],
 
+        'filemanager' => [
+            'driver' => 'local',
+            'root' => '/var/www/filemanager',
+        ],
+
+        'geoserver' => [
+            'driver' => 'local',
+            'root' => '/var/www/app/docker/geoserver/data'
+        ],
+
     ],
 
     /*

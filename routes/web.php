@@ -30,5 +30,5 @@ Route::middleware(['auth'])->group(function() {
     Route::resource('users', App\Http\Controllers\UserController::class);
     Route::get('getUsers', 'App\Http\Controllers\UserController@getUsers')->name('getUsers');
 
-    //Route::get('fileManager', [App\Http\Controllers\FileManagerController::class, 'index'])->name('fileManager');
+    Route::get('fileManager', [App\Http\Controllers\FileManagerController::class, 'index'])->name('fileManager');
 });
