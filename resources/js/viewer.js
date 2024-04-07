@@ -1,4 +1,4 @@
-'ol/ol.css';
+import 'ol/ol.css';
 import {Map,View} from 'ol';
 import TileLayer from 'ol/layer/WebGLTile';
 import Group from 'ol/layer/Group';
@@ -25,6 +25,9 @@ import {toStringXY} from 'ol/coordinate';
 import OSM from 'ol/source/OSM';
 import StadiaMaps from 'ol/source/StadiaMaps';
 
+import 'ol-ext/dist/ol-ext.css';
+import LayerSwitcher from 'ol-ext/control/LayerSwitcher';
+
 
 var CSRF_TOKEN = document.querySelector('meta[name=csrf-token]').content;
 
@@ -41,6 +44,11 @@ for (let z = 0; z < 20; ++z) {
 
 var map;
 
+// Control LayerSwitcher
+let LayerSwitcherCtrl = new LayerSwitcher({
+    collapsed: false
+});
+
 var baseLayers = new Group(
     {   id: 'baseLayers',
         title: 'Baselayers',
@@ -54,7 +62,37 @@ var baseLayers = new Group(
                     name: 'osm',
                     opacity: 1,
                     source: new OSM()
-                })
+                }),
+                new TileLayer(
+                    {	id: 'ortopnoa',
+                        title: "Orto PNOA",
+                        name: 'ortopnoa',
+                        source: new TileWMS({
+                            url: 'https://www.ign.es/wms-inspire/pnoa-ma?',
+                            params: {LAYERS: 'OI.OrthoimageCoverage', VERSION: '1.1.1', TILED: true}
+                        })
+                    }),
+            ]
+    });
+
+var newGroupLayers = new Group(
+    {   id: 'newGroupLayers',
+        title: 'New Group',
+        openInLayerSwitcher: true,
+        noSwitcherDelete: true,
+        layers:
+            [
+                /*
+                new TileLayer(
+                    {	id: '',
+                        title: '',
+                        name: '',
+                        source: new TileWMS({
+                            url: '',
+                            params: {LAYERS: '', VERSION: '1.1.1', TILED: true}
+                        })
+                    }),
+                 */
             ]
     });
 
@@ -81,7 +119,7 @@ var f_obj = {
 
         map = new Map({
             target: 'map',
-            layers: baseLayers,
+            layers: [baseLayers,/* newGroupLayers */],
             overlays: [],
             controls: [],
             view: new View({
@@ -93,6 +131,8 @@ var f_obj = {
             }),
             renderer: 'webgl'
         });
+
+        map.addControl(LayerSwitcherCtrl);
 
         setTimeout(function(){
             resizeWindow();

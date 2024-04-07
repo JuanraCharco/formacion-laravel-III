@@ -23,7 +23,7 @@
     "dependencies": {
         "jstree": "^3.3.16",
         "ol": "^9.0.0",
-        "ol-ext-tidop": "^0.0.23",
+        "ol-ext": "^4.0.17",
         "winbox": "^0.2.82"
     }
 }
