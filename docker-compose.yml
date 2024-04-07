@@ -1,0 +1,76 @@
+volumes:
+    postgres-data:
+    pgadmin-data:
+networks:
+    frontend:
+    backend:
+services:
+    proxy:
+        image: nginx:latest
+        hostname: proxy
+        ports:
+            - "80:80"
+        volumes:
+            - ./:/var/www/app
+            - ./docker/nginx/nginx-site.conf:/etc/nginx/conf.d/default.conf
+        networks:
+            - frontend
+            - backend
+    php:
+        build:
+            context: ./docker/php
+            dockerfile: Dockerfile
+        image: laravel:latest
+        hostname: php
+        restart: always
+        volumes:
+            - ./:/var/www/app
+            - ./docker/php/filemanager:/var/www/filemanager
+        networks:
+            - backend
+    postgres:
+        image: postgres:latest
+        hostname: postgres
+        restart: always
+        volumes:
+            - postgres-data:/var/lib/postgresql/data
+        ports:
+            - "5432:5432"
+        environment:
+            POSTGRES_PASSWORD: Pass#12345
+            POSTGRES_USER: postgres
+            POSTGRES_DB: laraveldb
+            PGDATA: /var/lib/postgresql/data
+        networks:
+            - backend
+    pgadmin:
+        image: dpage/pgadmin4
+        hostname: pgadmin4
+        restart: always
+        ports:
+            - "8888:80"
+        environment:
+            PGADMIN_DEFAULT_EMAIL: tidop@tidop.es
+            PGADMIN_DEFAULT_PASSWORD: Pass#12345
+        volumes:
+            - pgadmin-data:/var/lib/pgadmin
+        networks:
+            - backend
+    geoserver:
+        image: kartoza/geoserver:2.22.2
+        hostname: geoserver
+        restart: always
+        ports:
+            - "8080:8080"
+        volumes:
+            - ./docker/geoserver:/opt/geoserver/data_dir
+            - ./docker/geoserver/data:/opt/geoserver/data_dir/data
+        environment:
+            GEOSERVER_DATA_DIR: /opt/geoserver/data_dir
+            GEOSERVER_ADMIN_USER: admin
+            GEOSERVER_ADMIN_PASSWORD: Pass#12345
+            STABLE_EXTENSIONS: sldservice-plugin,feature-pregeneralized-plugin,css-plugin,importer-plugin
+            INITIAL_MEMORY: 2G
+            MAXIMUM_MEMORY: 4G
+        networks:
+            - backend
