@@ -36,6 +36,7 @@ dr composer install
 ````
 sudo chgrp -R www-data storage bootstrap/cache
 sudo chmod -R ug+rwx storage bootstrap/cache
+sudo chown -R www-data:www-data docker/php/filemanager
 ````
 ### Ejecutar migraciones para generar la estructura de tablas en la base de datos
 ````
