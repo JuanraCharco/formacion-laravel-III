@@ -84,15 +84,15 @@ var newGroupLayers = new Group(
             [
                 /*
                 new TileLayer(
-                    {	id: '',
-                        title: '',
-                        name: '',
+                    {	id: 'orto',
+                        title: 'Orto Belinchón',
+                        name: 'Orto',
                         source: new TileWMS({
-                            url: '',
-                            params: {LAYERS: '', VERSION: '1.1.1', TILED: true}
+                            url: 'http://192.168.18.113:8080/geoserver/formacion/ows?',
+                            params: {LAYERS: 'formacion:Orto_Belinchon', VERSION: '1.1.1', TILED: true}
                         })
                     }),
-                 */
+                */
             ]
     });
 
@@ -119,7 +119,7 @@ var f_obj = {
 
         map = new Map({
             target: 'map',
-            layers: [baseLayers,/* newGroupLayers */],
+            layers: [baseLayers, newGroupLayers ],
             overlays: [],
             controls: [],
             view: new View({

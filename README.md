@@ -52,3 +52,7 @@ dr php artisan optimize:clear
 dr npm install
 dr npm run dev
 ````
+## Credenciales de acceso
+***Correo electrónico***: ````admin@tidop.es````
+
+***Contraseña***: ````admin@tidop.es````
