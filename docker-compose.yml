@@ -29,7 +29,7 @@ services:
         networks:
             - backend
     postgres:
-        image: postgres:latest
+        image: kartoza/postgis:14-3.3
         hostname: postgres
         restart: always
         volumes:

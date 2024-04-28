@@ -542,11 +542,13 @@ return [
                     'asset' => true,
                     'location' => '/vendor/chart.js/Chart.bundle.min.js',
                 ],
+                /*
                 [
                     'type' => 'js',
                     'asset' => true,
                     'location' => '/vendor/chart.js/chartjs-plugin-zoom.min.js',
                 ],
+                */
                 [
                     'type' => 'css',
                     'asset' => true,
